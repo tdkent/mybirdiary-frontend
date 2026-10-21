@@ -4,7 +4,7 @@ import type { NextConfig } from "next";
 const nextConfig: NextConfig = {
   images: {
     formats: ["image/webp"],
-    domains: ["res.cloudinary.com"],
+    remotePatterns: [new URL("https://res.cloudinary.com/**")],
   },
 };
 
