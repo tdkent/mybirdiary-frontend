@@ -9,6 +9,7 @@ type VerifyNewUserViewProps = {
 
 export const metadata: Metadata = {
   title: "Verify your email address - Birdiary",
+  robots: "noindex"
 };
 
 export default async function VerifyNewUserView({

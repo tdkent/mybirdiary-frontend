@@ -3,8 +3,7 @@ import ViewWrapper from "@/components/pages/shared/ViewWrapper";
 import type { Metadata } from "next";
 
 export const metadata: Metadata = {
-  title: "Terms of Service & Privacy Policy - Birdiary",
-  robots: "noindex"
+  title: "Terms of Service & Privacy Policy - Birdiary"
 };
 
 export default function TOSView() {

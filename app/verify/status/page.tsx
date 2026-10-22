@@ -13,6 +13,7 @@ type VerifyStatusViewProps = {
 
 export const metadata: Metadata = {
   title: "Email verification status - Birdiary",
+  robots: "noindex"
 };
 
 export default async function VerifyStatusView({

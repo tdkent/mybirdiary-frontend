@@ -12,6 +12,7 @@ type VerifyEmailViewProps = {
 
 export const metadata: Metadata = {
   title: "Verify your email address - Birdiary",
+  robots: "noindex"
 };
 
 export default async function VerifyEmailView({
