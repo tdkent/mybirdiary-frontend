@@ -11,7 +11,6 @@ import {
   sortBySightingsCount,
 } from "@/types/list-sort.types";
 import type { Metadata } from "next";
-import Head from "next/head";
 import { redirect } from "next/navigation";
 
 export async function generateMetadata(): Promise<Metadata> {

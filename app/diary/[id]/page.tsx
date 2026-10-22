@@ -12,7 +12,6 @@ import { ErrorMessages } from "@/types/error-messages.enum";
 import { type SortValues, sortByAlphaOptions } from "@/types/list-sort.types";
 import type { Metadata } from "next";
 import { redirect } from "next/navigation";
-import Head from "next/head";
 
 type DiaryViewProps = {
   params: Promise<{ id: string }>;
