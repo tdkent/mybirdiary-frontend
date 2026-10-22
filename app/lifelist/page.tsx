@@ -23,6 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${user && user.name ? `${user.name}'s` : "My"} birding life list - Birdiary`,
     description:
       "View your personal birdwatching life list. Shows every unique bird you have observed along with the date. Click on any sighting for full details.",
+    robots: "noindex"
   };
 }
 
