@@ -15,6 +15,7 @@ export const metadata: Metadata = {
   title: "Sighting details - Birdiary",
   description:
     "View the details of one of your bird sightings including the bird's common name, sighting date, description, and location. You may also edit or delete the sighting",
+  robots: "noindex"
 };
 
 /** Single sighting view. */

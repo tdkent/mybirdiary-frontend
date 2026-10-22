@@ -19,6 +19,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${user && user.name ? `${user.name}'s` : "My"} birdwatching diary - Birdiary`,
     description:
       "View your birdwatching diary with all sightings grouped by date. Sort diary entires by date or count of bird sightings. Click on any entry for full details.",
+    robots: "noindex"
   };
 }
 

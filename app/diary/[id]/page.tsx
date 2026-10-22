@@ -36,6 +36,7 @@ export async function generateMetadata({
   return {
     title: `${user && user.name ? `${user.name}'s` : "My"} diary on ${localeStr} - Birdiary`,
     description: `View your personal birdwatching diary on ${localeStr}, including a list with each bird sighting.`,
+    robots: "noindex"
   };
 }
 

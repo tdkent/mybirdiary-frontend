@@ -14,6 +14,7 @@ export const metadata: Metadata = {
   title: "Edit sighting - Birdiary",
   description:
     "Edit the common name, date, description, or location of one of your bird sightings.",
+  robots: "noindex"
 };
 
 export default async function EditSightingView({

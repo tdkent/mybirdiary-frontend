@@ -9,6 +9,7 @@ export const metadata: Metadata = {
   title: "Edit my profile - Birdiary",
   description:
     "Edit your personal profile details including name and location.",
+  robots: "noindex"
 };
 
 export default async function EditProfileView() {

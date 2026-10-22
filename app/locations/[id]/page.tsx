@@ -37,6 +37,7 @@ export async function generateMetadata({
       title: `Location details - Birdiary`,
       description:
         "View details of a birdwatching location including a list of your sightings.",
+      robots: "noindex"
     };
 
   const result: ApiResponse<Location> = await serverApiRequest({

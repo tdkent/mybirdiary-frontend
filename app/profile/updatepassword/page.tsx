@@ -8,6 +8,7 @@ import Link from "next/link";
 export const metadata: Metadata = {
   title: "Update my password - Birdiary",
   description: "Update the password you use to sign in to your account.",
+  robots: "noindex"
 };
 
 export default async function UpdatePasswordView() {
