@@ -13,6 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return {
     title: `${user && user.name ? `${user.name}'s` : "My"} profile - Birdiary`,
     description: "View and edit your personal profile and account details.",
+    robots: "noindex"
   };
 }
 
