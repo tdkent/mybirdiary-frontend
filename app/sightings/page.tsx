@@ -20,6 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: `${user && user.name ? `${user.name}'s` : "My"} bird sightings - Birdiary`,
     description:
       "View all your recorded bird sightings in one place. Sort sightings by date or bird. Click on any sighting for full details.",
+      robots: "noindex"
   };
 }
 
