@@ -1,13 +1,14 @@
 "use server";
 
 import CONFIG from "@/constants/config.constants";
-import { getCookie } from "@/helpers/auth.helpers";
+import { getCookie } from "@/lib/session";
 import type {
   ApiRequestInputs,
   ApiResponse,
   Headers,
   RequestHeaders,
 } from "@/types/api.types";
+import { ErrorMessages } from "@/types/error-messages.enum";
 import type { UserWithCountAndBird } from "@/types/user.types";
 import { revalidateTag } from "next/cache";
 
@@ -55,4 +56,27 @@ export async function serverApiRequest({
   }
 
   return res.json();
+}
+
+export async function exportSightingsCsv(): Promise<
+  { error: true; message: string } | { error: false; csv: string }
+> {
+  const jwt = await getCookie();
+  if (!jwt) return { error: true, message: ErrorMessages.InvalidSession };
+
+  const res = await fetch(CONFIG.BASE_URL + "/users/export-data", {
+    cache: "no-store",
+    headers: { Authorization: `Bearer ${jwt}` },
+  });
+
+  if (!res.ok) {
+    try {
+      const result: ApiResponse<null> = await res.json();
+      return { error: true, message: result.message };
+    } catch {
+      return { error: true, message: ErrorMessages.Unexpected };
+    }
+  }
+
+  return { error: false, csv: await res.text() };
 }

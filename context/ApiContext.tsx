@@ -3,7 +3,7 @@
 import { serverApiRequest } from "@/actions/api.actions";
 import { deleteSessionCookie } from "@/actions/auth.actions";
 import { useAuth } from "@/context/AuthContext";
-import { getCookie } from "@/helpers/auth.helpers";
+import { hasSessionCookie } from "@/helpers/auth.helpers";
 import { mutateStorage, queryStorage } from "@/helpers/storage.helpers";
 import {
   Api,
@@ -43,8 +43,8 @@ export default function ApiProvider({
     useEffect(() => {
       async function query() {
         setError(null);
-        const token = await getCookie();
-        if (token) {
+        const hasSession = await hasSessionCookie();
+        if (hasSession) {
           setPending(true);
           try {
             const result: ApiResponse<unknown> = await serverApiRequest({
@@ -107,8 +107,8 @@ export default function ApiProvider({
 
     async function mutate(formValues: object) {
       setSuccess(false);
-      const token = await getCookie();
-      if (token) {
+      const hasSession = await hasSessionCookie();
+      if (hasSession) {
         setError(null);
         setPending(true);
         try {

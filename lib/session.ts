@@ -43,6 +43,11 @@ export async function createSession(id: number) {
   return session;
 }
 
+// Read the raw session JWT server-only
+export async function getCookie() {
+  return (await cookies()).get("session")?.value;
+}
+
 export async function deleteSession() {
   const cookieStore = await cookies();
   cookieStore.delete("session");
