@@ -1,8 +1,7 @@
 "use server";
 
 import { getUser } from "@/actions/api.actions";
-import { decrypt } from "@/lib/session";
-import { cookies } from "next/headers";
+import { decrypt, getCookie } from "@/lib/session";
 
 export async function checkSession() {
   const cookie = await getCookie();
@@ -16,9 +15,9 @@ export async function checkSession() {
   return true;
 }
 
-export async function getCookie() {
-  const cookie = (await cookies()).get("session")?.value;
-  return cookie;
+// Check session cookie is present.
+export async function hasSessionCookie() {
+  return Boolean(await getCookie());
 }
 
 export async function getUserProfileOrNull() {
