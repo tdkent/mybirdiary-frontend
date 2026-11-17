@@ -1,11 +1,9 @@
 "use client";
 
+import { exportSightingsCsv } from "@/actions/api.actions";
 import PendingIcon from "@/components/forms/PendingIcon";
 import ErrorDisplay from "@/components/pages/shared/ErrorDisplay";
 import { Button } from "@/components/ui/button";
-import CONFIG from "@/constants/config.constants";
-import { useAuth } from "@/context/AuthContext";
-import type { ApiResponse } from "@/types/api.types";
 import { Download } from "lucide-react";
 import { useRef, useState } from "react";
 
@@ -14,7 +12,6 @@ export default function ExportCsv() {
   const [fetchError, setFetchError] = useState<Error | null>(null);
   const [pending, setPending] = useState(false);
 
-  const { token } = useAuth();
   const linkRef = useRef(null);
 
   async function handleClick() {
@@ -22,20 +19,13 @@ export default function ExportCsv() {
     setFetchError(null);
     setPending(true);
     try {
-      const fetchUrl = CONFIG.BASE_URL + "/users/export-data";
-      const response = await fetch(fetchUrl, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      // Fetched server-side so the session token never reaches the browser
+      const result = await exportSightingsCsv();
 
-      if (!response.ok) {
-        const result: ApiResponse<null> = await response.json();
-        return setError(result.message);
-      }
+      if (result.error) return setError(result.message);
 
       // Create href from blob object
-      const blob = await response.blob();
+      const blob = new Blob([result.csv], { type: "text/csv;charset=utf-8" });
       const url = window.URL.createObjectURL(blob);
       const link = linkRef.current as HTMLAnchorElement | null;
 

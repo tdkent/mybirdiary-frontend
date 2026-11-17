@@ -1,20 +1,18 @@
 "use client";
 
-import { checkSession, getCookie } from "@/helpers/auth.helpers";
+import { checkSession } from "@/helpers/auth.helpers";
 import { ErrorMessages } from "@/types/error-messages.enum";
 import { usePathname } from "next/navigation";
 import { createContext, useContext, useEffect, useState } from "react";
 
 type Auth = {
   isSignedIn: boolean;
-  token: string;
   signIn: () => void;
   signOut: () => void;
 };
 
 export const AuthContext = createContext<Auth>({
   isSignedIn: false,
-  token: "",
   signIn: () => {},
   signOut: () => {},
 });
@@ -26,19 +24,11 @@ export default function AuthProvider({
   children: React.ReactNode;
 }) {
   const [isSignedIn, setIsSignedIn] = useState<boolean>(false);
-  const [token, setToken] = useState<string>("");
 
   const path = usePathname();
 
   const checkAuth = async () => {
-    const hasSession = await checkSession();
-    setIsSignedIn(hasSession);
-    if (hasSession) {
-      const cookie = (await getCookie()) as string;
-      setToken(cookie);
-    } else {
-      setToken("");
-    }
+    setIsSignedIn(await checkSession());
   };
 
   // Check auth on navigation and refresh
@@ -46,19 +36,16 @@ export default function AuthProvider({
     checkAuth();
   }, [path, isSignedIn]);
 
-  async function signIn() {
+  function signIn() {
     setIsSignedIn(true);
-    setToken((await getCookie()) as string);
   }
 
   function signOut() {
     setIsSignedIn(false);
-    setToken("");
   }
 
   const auth: Auth = {
     isSignedIn,
-    token,
     signIn,
     signOut,
   };
